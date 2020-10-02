@@ -1,13 +1,9 @@
+import { abc, ABC } from './constants.js';
+import { isCapitalized } from './helpers.js';
+
 const input = 'lorem ipsum xyANSi';
 
 let isEncoding = false;
-
-const isCapitalized = (letter) => {
-  if (letter.toLowerCase() === letter) {
-    return false;
-  }
-  return true;
-};
 
 const newArr = [];
 
@@ -41,4 +37,3 @@ const output = newArr.map((index) => {
 
 console.log(input);
 console.log(output);
-
