@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "RSSchool Node.JS training task",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "lint": "eslint src/**/*.js"
   },
@@ -24,12 +23,11 @@
   },
   "homepage": "https://github.com/tensegrity666/caesar-cypher#readme",
   "devDependencies": {
-    "commitlint": "^11.0.0",
     "eslint": "^7.10.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.1"
   },
   "dependencies": {
-    "minimist": "^1.2.5"
+    "commander": "^6.1.0"
   }
 }
