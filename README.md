@@ -16,5 +16,5 @@ Tool accept 5 options:
 - -a, --action: encode/decode (encode by default)
 
 ### Usage example:
-`node app -s 5 --input test.txt -o out.txt --action encode`
+`node app -s 5 --input test.txt -o out.txt --action encode`<br>
 `node app --help`
