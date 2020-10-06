@@ -4,7 +4,9 @@
   "description": "RSSchool Node.JS training task",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint src/**/*.js"
+    "lint": "eslint src/**/*.js",
+    "example": "node src/app --shift 5 --input src/example.txt --action encode",
+    "help": "node src/app --help"
   },
   "repository": {
     "type": "git",
@@ -28,6 +30,7 @@
     "eslint-plugin-import": "^2.22.1"
   },
   "dependencies": {
+    "chalk": "^4.1.0",
     "commander": "^6.1.0"
   }
 }

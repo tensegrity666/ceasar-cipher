@@ -9,9 +9,12 @@ const ceasarCipher = (string, number) => {
   const input = string.toLowerCase();
   const output = [];
 
-  for (let i = 0; i < input.length; i++) {
-    const letter = input[i];
-    const index = abc.indexOf(letter) + (number % 26);
+  const inputArr = input.split('');
+
+  inputArr.forEach((letter, i) => {
+    let index = abc.indexOf(letter) + (number % 26);
+    if (index > 25) index -= 26;
+    if (index < 0) index += 26;
 
     if (abc.indexOf(letter) !== -1) {
       isCapitalized(string, i)
@@ -20,7 +23,7 @@ const ceasarCipher = (string, number) => {
     } else {
       output.push(string[i]);
     }
-  }
+  });
 
   return output.join('');
 };
