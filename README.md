@@ -7,7 +7,7 @@ CLI-tool, based on Commander.js for encoding and decoding text messages.
 ### Implementation features:
 A shift of 1 means that the current letter will be replaced with the next letter in the alphabet.<br>
 A shift by a __negative number is possible__, with -1 the letter will be replaced by the letter in front of it.<br>
-With a shift of more than __26__ characters (the length of the Latin alphabet), the characters will be taken from the beginning of the alphabet (___27__ - "__a__", __28__ - "__b__" and so on).<br>
+With a shift of more than __26__ characters (the length of the Latin alphabet), the characters will be taken from the beginning of the alphabet (__27__ - "__a__", __28__ - "__b__" and so on).<br>
 
 #### Example:<br>
 __Original text:__<br>
