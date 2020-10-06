@@ -5,22 +5,22 @@ CLI-tool, based on Commander.js for encoding and decoding text messages.
 
 - - -
 
-- Clone repo (via SSH)
+- Clone repo (via SSH)<br>
 `$ git clone git@github.com:tensegrity666/ceasar-cipher.git`
 
-- then checkout to origin/dev:
-`$ git fetch origin`
+- then checkout to origin/dev:<br>
+`$ git fetch origin`<br>
 `$ git checkout -b dev origin/dev`
 
 - - -
 
-- Install
+- Install<br>
 `$ npm i`
 
-- Run example
+- Run example<br>
 `$ npm run example`
 
-- Watch info
+- Watch info<br>
 `$ npm run help`
 - - -
 
@@ -35,12 +35,14 @@ CLI-tool, based on Commander.js for encoding and decoding text messages.
 
 
 ## Usage example:
-- from __root of repo__:
+- from __root of repo__:<br>
 `node src/app -s 5 --input test.txt -o out.txt --action encode`<br>
 
-- from __/src__:
-`node app -s 1 -a encode`<br>
-`node app --shift 1 --action decode`<br>
-`node app -s 2 -i example.txt -a decode`<br>
-`node app -s 22 -i example.txt -a encode`<br>
-`node app -s 14 --input example.txt --output test.txt -a encode`<br>
+- from __/src__:<br>
+`$ node app -s 1 -a encode`<br>
+`$ node app --shift 1 --action decode`<br>
+`$ node app -s 2 -i example.txt -a decode`<br>
+`$ node app -s 22 -i example.txt -a encode`<br>
+`$ node app -s 14 --input example.txt --output test.txt -a encode`<br>
+
+__stop execution of app:__ `control + C`
