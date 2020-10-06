@@ -2,8 +2,8 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable import/extensions */
 
-const abc = 'abcdefghijklmnopqrstuvwxyz'.split('');
-const isCapitalized = (str, index) => str[index] === str[index].toUpperCase();
+const { abc } = require('./constants');
+const { isCapitalized } = require('./helpers');
 
 const ceasarCipher = (string, number) => {
   const input = string.toLowerCase();
@@ -12,9 +12,9 @@ const ceasarCipher = (string, number) => {
   const inputArr = input.split('');
 
   inputArr.forEach((letter, i) => {
-    let index = abc.indexOf(letter) + (number % 26);
-    if (index > 25) index -= 26;
-    if (index < 0) index += 26;
+    let index = abc.indexOf(letter) + (number % abc.length);
+    if (index > (abc.length - 1)) index -= abc.length;
+    if (index < 0) index += abc.length;
 
     if (abc.indexOf(letter) !== -1) {
       isCapitalized(string, i)

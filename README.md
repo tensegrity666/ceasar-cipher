@@ -39,7 +39,7 @@ CLI-tool, based on Commander.js for encoding and decoding text messages.
 __Entry point: app.js__<br>
 <br>
 - from __root of repo__:<br>
-`node src/app -s 5 --input test.txt -o out.txt --action encode`<br>
+`$ node src/app -s 5 --input test.txt -o out.txt --action encode`<br>
 
 - from __/src__:<br>
 `$ node app -s 1 -a encode`<br>

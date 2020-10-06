@@ -1,8 +1,8 @@
 {
-  "name": "caesar-cypher",
+  "name": "caesar-cipher",
   "version": "0.0.1",
   "description": "RSSchool Node.JS training task",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "lint": "eslint src/**/*.js",
     "example": "node src/app --shift 5 --input src/example.txt --action encode",
@@ -15,7 +15,7 @@
   "keywords": [
     "nodejs",
     "javascript",
-    "minimist",
+    "commander",
     "cli"
   ],
   "author": "Roman Yakovlev",

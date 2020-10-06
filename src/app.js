@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 /* eslint-disable no-restricted-globals */
 
 const path = require('path');
@@ -8,16 +7,18 @@ const chalk = require('chalk');
 
 const ceasarCipher = require('./ceasar-cipher');
 const program = require('./parser');
-
-const {
-  input, shift, output, action,
-} = program;
-
-const actions = ['encode', 'decode'];
+const { actions, messages } = require('./constants');
+const { fileValidation } = require('./helpers');
 
 const app = (inputFile, num, outputFile, actionWithString) => {
+  const { log } = console;
   let shiftNum = +num;
   const normalizedAction = actionWithString.toString().toLowerCase();
+
+  const {
+    actionRequired, invalidParam, encriptMode, decriptMode, information,
+  } = messages;
+  const [encode, decode] = actions;
 
   const readFromFile = (inputFile !== undefined)
     ? path.resolve(inputFile) : null;
@@ -26,40 +27,34 @@ const app = (inputFile, num, outputFile, actionWithString) => {
     ? path.resolve(__dirname, `./${outputFile}`) : null;
 
   if (actionWithString === undefined || typeof actionWithString !== 'string') {
-    process.stderr.write(chalk.red('Action ("encode" or "decode") is reqired! \n'));
+    process.stderr.write(chalk.red(actionRequired));
     process.exit(-1);
   }
 
   if (!actions.includes(normalizedAction)) {
-    process.stderr.write(chalk.red('Action ("encode" or "decode") is reqired! \n'));
+    process.stderr.write(chalk.red(actionRequired));
+    process.exit(-1);
+  }
+
+  if (shiftNum === undefined) {
+    process.stderr.write(chalk.red(invalidParam));
     process.exit(-1);
   }
 
   if (isNaN(shiftNum)) {
-    process.stderr.write(chalk.red('Invalid parameter, shift must be a number. \n'));
+    process.stderr.write(chalk.red(invalidParam));
     process.exit(-1);
   }
 
-  const fileValidation = (file) => {
-    if (file !== null) {
-      fs.access(file, fs.F_OK, (err) => {
-        if (err) {
-          process.stderr.write(`File: ${file} does not exist. \n`);
-          process.exit(-1);
-        }
-      });
-    }
-
-    return file;
-  };
-
-  if (normalizedAction === 'decode') {
+  if (normalizedAction === decode) {
     shiftNum = -shiftNum;
-    console.log('\x1b[32m', 'The application is running in decryption mode. \n');
+    log(decriptMode);
+    log(chalk.blue(information));
   }
 
-  if (normalizedAction === 'encode') {
-    console.log(chalk.magenta(' The application is running in encryption mode. \n'));
+  if (normalizedAction === encode) {
+    log(chalk.magenta(encriptMode));
+    log(chalk.blue(information));
   }
 
   const streamIn = readFromFile !== null ? fs.createReadStream(fileValidation(readFromFile), { encoding: 'utf8' }) : process.stdin;
@@ -82,9 +77,16 @@ const app = (inputFile, num, outputFile, actionWithString) => {
     streamTransform,
     streamOut,
     (error) => {
-      if (error) process.stderr.write(`Some error: ${error.ENOENT} \n`);
+      if (error) {
+        process.stderr.write(`Some error: ${error.ENOENT} \n`);
+        process.exit(-1);
+      }
     },
   );
 };
+
+const {
+  input, shift, output, action,
+} = program;
 
 app(input, shift, output, action);
