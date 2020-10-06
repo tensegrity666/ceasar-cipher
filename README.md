@@ -1,4 +1,5 @@
-[Link to task](https://github.com/rolling-scopes-school/nodejs-course-template/blob/master/TASKS.md)
+[Link to task](https://github.com/rolling-scopes-school/nodejs-course-template/blob/master/TASKS.md)<br>
+#### [Deadline: 23:59 06.10.2020](https://discord.com/channels/755676888680366081/755860337059823667/763103442054545411)
 
 ## [Caesar Cipher](https://en.wikipedia.org/wiki/Caesar_cipher)
 CLI-tool, based on Commander.js for encoding and decoding text messages.
@@ -35,6 +36,8 @@ CLI-tool, based on Commander.js for encoding and decoding text messages.
 
 
 ## Usage example:
+__Entry point: app.js__<br>
+<br>
 - from __root of repo__:<br>
 `node src/app -s 5 --input test.txt -o out.txt --action encode`<br>
 
