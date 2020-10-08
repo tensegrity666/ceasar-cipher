@@ -1,14 +1,12 @@
 /* eslint-disable no-restricted-globals */
 
-const path = require('path');
-const fs = require('fs');
-const { pipeline, Transform } = require('stream');
+const { pipeline } = require('stream');
 const chalk = require('chalk');
 
 const ceasarCipher = require('./ceasar-cipher');
-const program = require('./parser');
+const { streamIn, streamOut, streamTransform } = require('./streams');
 const { actions, messages } = require('./constants');
-const { fileValidation } = require('./helpers');
+const { pathResolver } = require('./helpers');
 
 const app = (inputFile, num, outputFile, actionWithString) => {
   const { log } = console;
@@ -16,15 +14,12 @@ const app = (inputFile, num, outputFile, actionWithString) => {
   const normalizedAction = actionWithString.toString().toLowerCase();
 
   const {
-    actionRequired, invalidParam, encriptMode, decriptMode, information,
+    actionRequired, invalidParam, encriptMode, decriptMode,
   } = messages;
   const [encode, decode] = actions;
 
-  const readFromFile = (inputFile !== undefined)
-    ? path.resolve(inputFile) : null;
-
-  const writeToFile = (outputFile !== undefined)
-    ? path.resolve(__dirname, `./${outputFile}`) : null;
+  const readFromFile = pathResolver(inputFile);
+  const writeToFile = pathResolver(outputFile);
 
   if (actionWithString === undefined || typeof actionWithString !== 'string') {
     process.stderr.write(chalk.red(actionRequired));
@@ -49,33 +44,16 @@ const app = (inputFile, num, outputFile, actionWithString) => {
   if (normalizedAction === decode) {
     shiftNum = -shiftNum;
     log(decriptMode);
-    log(chalk.blue(information));
   }
 
   if (normalizedAction === encode) {
     log(chalk.magenta(encriptMode));
-    log(chalk.blue(information));
   }
 
-  const streamIn = readFromFile !== null ? fs.createReadStream(fileValidation(readFromFile), { encoding: 'utf8' }) : process.stdin;
-
-  const streamOut = writeToFile !== null ? fs.createWriteStream(fileValidation(writeToFile), { encoding: 'utf8', flags: 'a' }) : process.stdout;
-
-  const streamTransform = new Transform({
-    transform: (chunk, encoding, callback) => {
-      try {
-        const data = ceasarCipher(chunk.toString('utf8'), shiftNum);
-        callback(null, data);
-      } catch (error) {
-        callback(error);
-      }
-    },
-  });
-
   return pipeline(
-    streamIn,
-    streamTransform,
-    streamOut,
+    streamIn(readFromFile),
+    streamTransform(ceasarCipher, shiftNum),
+    streamOut(writeToFile),
     (error) => {
       if (error) {
         process.stderr.write(`Some error: ${error.ENOENT} \n`);
@@ -85,8 +63,4 @@ const app = (inputFile, num, outputFile, actionWithString) => {
   );
 };
 
-const {
-  input, shift, output, action,
-} = program;
-
-app(input, shift, output, action);
+module.exports = app;

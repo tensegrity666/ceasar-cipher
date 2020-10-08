@@ -1,6 +1,7 @@
 /* eslint-disable no-bitwise */
 
 const fs = require('fs');
+const path = require('path');
 const chalk = require('chalk');
 
 const fileValidation = (file) => {
@@ -18,4 +19,8 @@ const fileValidation = (file) => {
 
 const isCapitalized = (str, index) => str[index] === str[index].toUpperCase();
 
-module.exports = { fileValidation, isCapitalized };
+const pathResolver = (file) => ((file !== undefined)
+  ? path.resolve(file)
+  : null);
+
+module.exports = { fileValidation, isCapitalized, pathResolver };

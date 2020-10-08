@@ -5,7 +5,6 @@ const messages = {
   invalidParam: ' Invalid parameter, shift must be a number. \n',
   encriptMode: ' The application is running in encryption mode. \n',
   decriptMode: '\x1b[32m The application is running in decryption mode. \n',
-  information: ' Press "Control + C" to complete. \n',
 };
 
 const abc = 'abcdefghijklmnopqrstuvwxyz'.split('');
